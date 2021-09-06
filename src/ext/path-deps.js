@@ -24,7 +24,8 @@
         var eltsWithDeps = htmx.findAll("[path-deps]");
         for (var i = 0; i < eltsWithDeps.length; i++) {
             var elt = eltsWithDeps[i];
-            if (dependsOn(elt.getAttribute('path-deps'), path)) {
+            const attr = elt.getAttribute('path-deps')
+            if (dependsOn(attr, path)) {
                 htmx.trigger(elt, "path-deps");
             }
         }      

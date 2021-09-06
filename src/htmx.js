@@ -1543,6 +1543,7 @@ return (function () {
             }
             detail["elt"] = elt;
             var event = makeEvent(eventName, detail);
+            
             if (htmx.logger && !ignoreEventForLogging(eventName)) {
                 htmx.logger(elt, eventName, detail);
             }
@@ -1559,6 +1560,7 @@ return (function () {
             withExtensions(elt, function (extension) {
                 eventResult = eventResult && (extension.onEvent(eventName, event) !== false)
             });
+
             return eventResult;
         }
 

@@ -170,4 +170,17 @@ describe("path-deps extension", function() {
         this.server.respond();
         div2.innerHTML.should.equal("Deps fired!");
     });
+    it("path-deps usage example", function () {
+        this.server.respondWith("POST", "/entries/12", "Deps fired!");
+        this.server.respondWith("GET", "/message/", "<li>message showed</li>");
+        var div1 = make(`
+            <div hx-ext="path-deps">
+                <ul hx-get="/message/" hx-trigger="path-deps" path-deps="/entries/*"></ul> 
+                <button id="buttonSubmit" hx-post="/entries/12">Click Me!</button> 
+            </div>`)
+        byId("buttonSubmit").click();
+        this.server.respond();
+        div1.innerHTML.should.contains('message showed');
+
+    });
 });
